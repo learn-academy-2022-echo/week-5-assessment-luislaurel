@@ -10,24 +10,28 @@ letter_o = 'o'
 letter_t = 't'
 # Expected output: ['tea', 'water', 'soda water']
 
-# char.each do |array, value | 
-# p array
+def particular_array array, character
+ return array.select {|value| value.include?(character) } 
 
+end    
 
-# end  
+p particular_array(beverages_array, letter_o)
+
+p particular_array(beverages_array, letter_t)
+# p smaller_array(beverages_array,letter_o)
 # -------------------2) Create a method that takes in a hash and returns one array with all the hash values at their own index and in alphabetical order. No nested arrays. Use the test variable provided.
 # HINT: Google 'ruby get rid of nested arrays'
 
-us_states = { northwest: ['Washington', 'Oregon', 'Idaho'], southwest: ['California', 'Arizona', 'Nevada'], notheast: ['Maine', 'New Hampshire', 'Vermont'] }
+# us_states = { northwest: ['Washington', 'Oregon', 'Idaho'], southwest: ['California', 'Arizona', 'Nevada'], notheast: ['Maine', 'New Hampshire', 'Vermont'] }
 
-# Expected output: ['Arizona', 'California', 'Idaho', 'Maine', 'Nevada', 'New Hampshire', 'Oregon', 'Vermont', 'Washington'] 
+# # Expected output: ['Arizona', 'California', 'Idaho', 'Maine', 'Nevada', 'New Hampshire', 'Oregon', 'Vermont', 'Washington'] 
 
-def return_array hash
-hash = hash.values
-hash.flatten.sort
-end    
+# def return_array hash
+# hash = hash.values
+# hash.flatten.sort
+# end    
 
- return_array(us_states)
+# p return_array(us_states)
 # --------------------3a) Create a class called Bike that is initialized with a model, wheels, and current_speed. The default number of wheels is 2. The current_speed should start at 0. Create a bike_info method that returns a sentence with all the data from the bike object.
 
 # Expected output example: 'The Trek bike has 2 wheels and is going 0 mph.'
@@ -49,18 +53,19 @@ class Bike
         
     end 
     def brake num
-      if @current_speed <= -1
-        @current_speed = 0
-      elsif @current_speed >= 1
-        @current_speed - num
+    @current_speed = @current_speed - num
+      if @current_speed < 0
+         @current_speed = 0
+      else
+        @current_speed
       end
-    end
+      end
 end  
 trekbike = Bike.new
 p trekbike.bike_info
 p trekbike.pedal_faster(30)
 p trekbike.brake(15)
-p trekbike.bike_info
+p trekbike.brake(14)
 
 
 # -------------------3b) Add the ability to pedal faster and brake. The pedal_faster method should increase the speed by a given amount. The brake method should decrease the speed by a given amount. The bike cannot go negative speeds.
